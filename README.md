@@ -25,10 +25,11 @@ SSAFY 13기 구미 캠퍼스 5반을 대상으로 한 알고리즘 스터디입�
 
 **BOJ 그룹 가입**: [SSAFY_13기_구미_5반 BOJ 그룹]( https://www.acmicpc.net/group/22689 )
 
-1. **Main Branch를 Fork합니다.**
-2. **Fork한 레포지토리를 Clone한 뒤 알고리즘 문제를 풀이합니다.**
-3. **문제를 해결한 후 백준 연습에 문제를 제출하고, Fork한 자신의 Repository에 Push합니다.**
-4. **월, 목에 코드리뷰 후 자신의 Branch에 Merge합니다.**
+1. **자신의 영문명으로 Branch를 생성합니다.**
+2. **Main Branch를 Fork합니다.**
+3. **Fork한 레포지토리를 Clone한 뒤 알고리즘 문제를 풀이합니다.**
+4. **문제를 해결한 후 백준 연습에 문제를 제출하고, Fork한 자신의 Repository에 Push합니다.**
+5. **월, 목에 코드리뷰 후 1번에서 생성한 자신의 Branch에 Merge합니다.**
 
 ### 스터디 진행 방식
 

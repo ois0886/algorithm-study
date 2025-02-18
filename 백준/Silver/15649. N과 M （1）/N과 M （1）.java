@@ -3,43 +3,43 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-// 백준알고리즘 15649 N과 M(1)
 public class Main {
-    static int N, M;
-    static boolean[] check;
-    static int[] arr;
-    static StringBuilder sb = new StringBuilder();
+	private static int N;
+	private static int M;
+	private static boolean[] isSelected;
+	static int[] numbers;
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+	public static void main(String[] args) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		String s = bf.readLine();
+		StringTokenizer st = new StringTokenizer(s);
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 
-        check = new boolean[N + 1];
-        arr = new int[N + 1];
+		numbers = new int[M];
+		isSelected = new boolean[N];
 
-        BackTracking(0);
+		permutation(0);
+	}
 
-        System.out.println(sb);
+	private static void permutation(int cnt) {
+		if (cnt == M) {
+			for (int i = 0; i < M; i++) {
+				System.out.print(numbers[i] + " ");
+			}
+			System.out.println();
+			return;
+		}
 
+		for (int i = 0; i < N; i++) {
+			if (isSelected[i])
+				continue;
 
-    }
+			numbers[cnt] = i + 1;
+			isSelected[i] = true;
+			permutation(cnt + 1);
+			isSelected[i] = false;
+		}
+	}
 
-    private static void BackTracking(int idx) {
-        if (idx == M) {
-            for (int i = 0; i < M; i++) {
-                sb.append(arr[i]).append(" ");
-            }
-            sb.append("\n");
-            return;
-        }
-        for (int i = 1; i <= N; i++) {
-            if (check[i]) continue;
-            check[i] = true;
-            arr[idx] = i;
-            BackTracking(idx + 1);
-            check[i] = false;
-        }
-    }
 }

@@ -1,53 +1,47 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    static int R;
-    static int C;
-    static int MAX;
-    static int[] X = {-1, 0, 1, 0};
-    static int[] Y = {0, -1, 0, 1};
-    static boolean[] have = new boolean[26];
+    static int R, C, maxStep;
+    static char[][] board;
+    static boolean[] visited = new boolean[26];
+    static int[] dx = {-1, 1, 0, 0};
+    static int[] dy = {0, 0, -1, 1};
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
         R = Integer.parseInt(st.nextToken());
         C = Integer.parseInt(st.nextToken());
-        char[][] graph = new char[R][C];
+        board = new char[R][C];
+        
         for (int i = 0; i < R; i++) {
-            String str = br.readLine();
-            for (int j = 0; j < C; j++) {
-                graph[i][j] = str.charAt(j);
-            }
-
+            board[i] = br.readLine().toCharArray();
         }
-        MAX = Integer.MIN_VALUE;
-        BT(graph, 0, 0, "");
-        bw.write(String.valueOf(MAX));
-        bw.flush();
-        bw.close();
+        
+        maxStep = 0;
+        dfs(0, 0, 1);
+        System.out.println(maxStep);
     }
 
-    public static void BT(char[][] graph, int x, int y, String s) {
-        StringBuilder sBuilder = new StringBuilder(s);
-        sBuilder.append(graph[x][y]);
-        int alpha = graph[x][y] - 'A';
-        have[alpha] = true;
+    static void dfs(int x, int y, int step) {
+        int alpha = board[x][y] - 'A';
+        visited[alpha] = true;
+        maxStep = Math.max(maxStep, step);
+        
         for (int i = 0; i < 4; i++) {
-            int nextX = x + X[i];
-            int nextY = y + Y[i];
-            if (nextX >= 0 && nextX < R && nextY >= 0 && nextY < C) {
-                if (!have[graph[nextX][nextY] - 'A']) {
-                    BT(graph, nextX, nextY, sBuilder.toString());
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            
+            if (nx >= 0 && nx < R && ny >= 0 && ny < C) {
+                int nextAlpha = board[nx][ny] - 'A';
+                if (!visited[nextAlpha]) {
+                    dfs(nx, ny, step + 1);
                 }
             }
-            if (MAX < sBuilder.toString().length()) {
-                MAX = sBuilder.toString().length();
-            }
         }
-        have[alpha] = false;
-        sBuilder.deleteCharAt(sBuilder.toString().length() - 1);
+        
+        visited[alpha] = false;
     }
 }
